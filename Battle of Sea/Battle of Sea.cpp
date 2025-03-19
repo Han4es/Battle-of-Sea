@@ -17,34 +17,78 @@
 #include <string>
 using namespace std;
 
-class ship
-{
-public:
-    int health;
+class Ship {
+private:
     string name;
+protected:
+    int health;
+public:
+    Ship(int health, string name) : health(health), name(name){}
+    int getHealth() const {
+        return health;
+    }
+    void getHit() {
+        if (health <= 0) {
+            cout << "Dead" << endl;
+        }
+        else {
+            --health;
+            cout << name << " was attacked" << endl;
+            displayHealth();
+        }
+    }
+    void displayHealth() {
+        cout << "Current health:"<< health << endl;
+    }
+    void displayName() {
+        cout << "Name of ship:" << name << endl;
+    }
 };
 
-class point 
-{
+class Pepe : public Ship {
 public:
+    Pepe():Ship(1,"Pepe") {}
+};
+
+class Destroyer : public Ship {
+public:
+    Destroyer() :Ship(2,"Destroyer") {}
+};
+
+class Cruiser : public Ship {
+public:
+    Cruiser() :Ship(3,"Cruiser") {}
+};
+
+class Battleship : public Ship {
+public:
+    Battleship() :Ship(4,"Battleship") {}
+};
+
+class Carrier : public Ship {
+public:
+    Carrier() :Ship(5,"Carrier") {}
+};
+
+
+
+class Point {
+private:
     int x;
     int y;
 };
 
 int main()
 {
-    ship one;
-    one.health = 1;
+    Battleship battleship_one;
+    Destroyer destroyer_one;
+    battleship_one.displayHealth();
+    battleship_one.getHit();
+    battleship_one.getHit();
+    destroyer_one.getHit();
+    destroyer_one.getHit();
+    destroyer_one.getHit();
+ 
 
-    ship two;
-    one.health = 2;
 
-    ship three;
-    one.health = 3;
-
-    ship four;
-    one.health = 4;
-
-    ship five;
-    one.health = 5;
 }
